@@ -2,6 +2,7 @@
 #include "lockfile.h"
 #include "merge-strategies.h"
 #include "run-command.h"
+#include "config.h"
 
 static const char *pgm;
 
@@ -47,6 +48,8 @@ int cmd_merge_index(int argc, const char **argv, const char *prefix)
 	 * what happened to our children.
 	 */
 	signal(SIGCHLD, SIG_DFL);
+
+	git_config(git_default_config, NULL);
 
 	if (argc < 3)
 		usage("git merge-index [-o] [-q] (<merge-program> | --use=merge-one-file) (-a | [--] [<filename>...])");
