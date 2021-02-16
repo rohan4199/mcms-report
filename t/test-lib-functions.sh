@@ -178,6 +178,9 @@ debug () {
 #	Invoke "git commit" with --signoff
 #   --author <author>
 #	Invoke "git commit" with --author <author>
+#   --no-tag
+#	Do not tag the resulting commit, if supplied giving the
+#	optional "<tag>" argument is an error.
 #
 # This will commit a file with the given contents and the given commit
 # message, and tag the resulting commit with the given tag name.
@@ -236,7 +239,10 @@ test_commit () {
 	git ${indir:+ -C "$indir"} commit \
 	    ${author:+ --author "$author"} \
 	    $signoff -m "$1" &&
-	if test -z "$no_tag"
+	if test -n "$no_tag" -a $# -eq 4
+	then
+		BUG "expect no <tag> parameter with --no-tag"
+	elif test -z "$no_tag"
 	then
 		git ${indir:+ -C "$indir"} tag "${4:-$1}"
 	fi
