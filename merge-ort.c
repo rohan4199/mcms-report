@@ -3112,6 +3112,7 @@ static int record_conflicted_index_entries(struct merge_options *opt,
 	if (strmap_empty(conflicted))
 		return 0;
 
+	ensure_full_index(index);
 	original_cache_nr = index->cache_nr;
 
 	/* Put every entry from paths into plist, then sort */
