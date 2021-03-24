@@ -42,8 +42,10 @@ struct repo_settings {
 
 	int core_multi_pack_index;
 
+	int use_builtin_fsmonitor;
+
 	unsigned command_requires_full_index:1,
-		 sparse_index:1, use_builtin_fsmonitor:1;
+		 sparse_index:1;
 };
 
 struct repository {
